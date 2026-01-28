@@ -31,7 +31,7 @@ public class Planet {
         return Math.sqrt(dx*dx+dy*dy);
     }
 
-    public static final double G = 6.67e-11;
+    private static final double G = 6.67e-11;
     public double calcForceExertedBy(Planet p){
         // calculate the force exerted on this by p
         double r = this.calcDistance(p);
