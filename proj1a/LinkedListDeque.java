@@ -33,7 +33,7 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
     }
-
+    /*
     public LinkedListDeque(T i) {
         size = 0;
         sentinel = new Node<>();
@@ -43,7 +43,7 @@ public class LinkedListDeque<T> {
         newNode.prev = sentinel;
         newNode.next = sentinel;
     }
-
+    */
     public void addFirst(T item) {
         Node<T> newNode = new Node<>(sentinel, item, sentinel.next);
         sentinel.next.prev = newNode;

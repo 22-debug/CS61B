@@ -31,14 +31,17 @@ public class ArrayDeque<T> {
     }
     private void update() {
         if (isfull()) {
-            resize(capacity*2);
+            resize(capacity * 2);
         } else if (size > 0 && capacity > 16 && size*4 <= capacity) {
             resize(Math.max(capacity / 2, 16));
         }
     }
 
     public void addFirst(T item) {
-        front = (front - 1) % capacity;
+        front = (front - 1 + capacity) % capacity;
+        //在Java中，-1 % 8 的结果是 -1，不是 7
+        //这是因为Java的 % 运算符是取余，不是数学上的模运算
+        //取余运算的结果符号与被除数相同（这里 -1 是负数）
         array[front] = item;
         size += 1;
         update();
@@ -78,7 +81,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        rear = (rear - 1) % capacity;
+        rear = (rear - 1 + capacity) % capacity;
         T value = array[rear];
         array[rear] = null;
         size -= 1;
@@ -96,4 +99,5 @@ public class ArrayDeque<T> {
         }
         return array[i];
     }
+
 }
