@@ -89,7 +89,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    public T rempveLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         } else {

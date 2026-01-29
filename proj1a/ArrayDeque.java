@@ -77,7 +77,7 @@ public class ArrayDeque<T> {
         return value;
     }
 
-    public T rempveLast() {
+    public T removeLast() {
         rear = (rear - 1) % capacity;
         T value = array[rear];
         array[rear] = null;
