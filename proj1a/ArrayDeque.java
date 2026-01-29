@@ -2,8 +2,8 @@ public class ArrayDeque<T> {
 
     private int size;
     private T[] array;
-    private int front;//第一个元素索引
-    private int rear;//最后一个元素后一个的索引
+    private int front; //第一个元素索引
+    private int rear; //最后一个元素后一个的索引
     private int capacity;
 
     public ArrayDeque() {
@@ -32,7 +32,7 @@ public class ArrayDeque<T> {
     private void update() {
         if (isfull()) {
             resize(capacity * 2);
-        } else if (size > 0 && capacity > 16 && size*4 <= capacity) {
+        } else if (size > 0 && capacity > 16 && size * 4 <= capacity) {
             resize(Math.max(capacity / 2, 16));
         }
     }
@@ -64,7 +64,7 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         int index = front;
-        while (index != rear) {//rear只能表示最后一个索引的后一位，否则循环条件不好表示
+        while (index != rear) { //rear只能表示最后一个索引的后一位，否则循环条件不好表示
             System.out.print(array[index]);
             System.out.print(' ');
             index = (index + 1) % capacity;
@@ -72,6 +72,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         T value = array[front];
         array[front] = null;
         front = (front + 1) % capacity;
@@ -81,6 +84,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         rear = (rear - 1 + capacity) % capacity;
         T value = array[rear];
         array[rear] = null;
