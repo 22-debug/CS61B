@@ -8,7 +8,6 @@ public class Percolation {
     //only including virtual top for checking fullness
     private WeightedQuickUnionUF fullUF;
     private final int n;
-    private int totalNum;
     private int openNum;
     private boolean[] isOpen;
     private final int virTop;
@@ -27,7 +26,6 @@ public class Percolation {
             isOpen[i] = false;
         }
         n = N;
-        totalNum = N * N;
         openNum = 0;
         virTop = n * n;
         virBottom = n * n + 1;
@@ -111,6 +109,9 @@ public class Percolation {
 
     public boolean percolates() {
         // does the system percolate?
+        if (openNum == 0) { //when N = 1,virtual top and bottom is connected
+            return false;
+        }
         return unionUF.connected(virTop, virBottom);
     }
 
