@@ -1,5 +1,6 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,18 +34,52 @@ public class TestComplexOomage {
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
 
-    /* TODO: Create a list of Complex Oomages called deadlyList
-     * that shows the flaw in the hashCode function.
-     */
-    /*
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
 
         // Your code here.
+        int N = 100;
+        int randomN = StdRandom.uniform(1, 10);
+        ArrayList<Integer> randomList = new ArrayList<>(randomN); //？
+        for (int i = 0; i < 1; i += 1) {
+            randomList.add(StdRandom.uniform(0, 255));
+        }
+
+        ArrayList<Integer> suffix = new ArrayList<>();
+        suffix.add(1);
+        suffix.add(2);
+        suffix.add(3);
+        suffix.add(4);
+        for (int i = 0; i < N; i++) {
+            ArrayList<Integer> params = randomList;
+            params.addAll(suffix);
+            /*
+            for (Integer j : params) {
+                System.out.print(j);
+                System.out.print(" ");
+            }
+            System.out.println();
+            Oomage temp = new ComplexOomage(params);
+            System.out.println(temp.hashCode());
+
+            197 1 2 3 4
+            16909060
+            197 1 2 3 4 1 2 3 4
+            16909060
+            197 1 2 3 4 1 2 3 4 1 2 3 4
+            16909060
+            197 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4
+            16909060
+            ......
+            四个循环 256 ^ 4 = 2 ^ 32 左移32位 int类型只能存储32位
+            1*256^3 + 2*256^2 + 3*256 + 4 = 16909060
+            */
+            deadlyList.add(new ComplexOomage(params));
+        }
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
-    } */
+    }
 
     /** Calls tests for SimpleOomage. */
     public static void main(String[] args) {

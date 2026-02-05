@@ -13,8 +13,15 @@ public class ComplexOomage implements Oomage {
     public int hashCode() {
         int total = 0;
         for (int x : params) {
-            total = total * 256;
+            /*
+            total = total * 256; //左移八位
             total = total + x;
+             */
+            total = (total * 31 + x) ^ (total >>> 16);
+            //31是质数，质数乘法能更好地混合比特位
+            //31是奇数，不会造成简单的位移效果
+            //total >>> 16：将total无符号右移16位
+            //^：按位异或（XOR）操作，将高位信息混合到低位
         }
         return total;
     }
