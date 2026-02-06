@@ -38,7 +38,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             for (int neighbor : maze.adj(curr)) {
                 if (!marked[neighbor]) {
                     edgeTo[neighbor] = curr;
-                    distTo[neighbor] = distTo[neighbor] + 1;
+                    distTo[neighbor] = distTo[curr] + 1;
                     announce();
                     bfsQueue.addLast(neighbor);
                     if (targetFound) {
