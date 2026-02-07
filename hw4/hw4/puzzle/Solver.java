@@ -41,7 +41,7 @@ public class Solver {
         solution = new ArrayList<>();
         SearchNode initialNode = new SearchNode(initial);
         pq.insert(initialNode);
-        while(!pq.isEmpty()) {
+        while (!pq.isEmpty()) {
             SearchNode best = pq.delMin();
             if (best.node.isGoal()) {
                 getMovesAndSolution(best);
