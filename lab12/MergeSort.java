@@ -35,7 +35,13 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> queueOfQueues = new Queue<>();
+        for (Item item : items) {
+            Queue<Item> singleQueue = new Queue<>();
+            singleQueue.enqueue(item);
+            queueOfQueues.enqueue(singleQueue);
+        }
+        return queueOfQueues;
     }
 
     /**
@@ -54,13 +60,44 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> mergedQueue = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            mergedQueue.enqueue(getMin(q1, q2));
+        }
+        return mergedQueue;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items.isEmpty() || items.size() == 1) {
+            return items;
+        }
+
+        Queue<Queue<Item>> singleItemQueues = makeSingleItemQueues(items);
+        while (singleItemQueues.size() > 1) {
+            Queue<Item> q1 = singleItemQueues.dequeue();
+            Queue<Item> q2 = singleItemQueues.dequeue();
+            singleItemQueues.enqueue(mergeSortedQueues(q1, q2));
+        }
+        return singleItemQueues.dequeue();
+    }
+
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<>();
+        students.enqueue("Vanessa");
+        students.enqueue("Alice");
+        students.enqueue("Josh");
+        students.enqueue("Garrison");
+        students.enqueue("Ethan");
+
+        Queue<String> sortedStudents = MergeSort.mergeSort(students);
+
+        System.out.println("Original: " + students);
+        System.out.println("Original size: " + students.size());
+
+        System.out.println("Sorted: " + sortedStudents);
+        System.out.println("Sorted size: " + sortedStudents.size());
     }
 }
